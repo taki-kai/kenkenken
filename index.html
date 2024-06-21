@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ケンケンチャレンジ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1 class="game-title">ケンケンチャレンジ</h1>
+        
+        <div id="setup" class="game-section">
+            <h2>プレイヤー数を選択</h2>
+            <input type="number" id="playerCount" class="player-input" min="2" value="2">
+            <button id="setPlayers" class="btn btn-primary">プレイヤー設定</button>
+        </div>
+
+        <div id="playerNames" class="game-section hidden">
+            <h2>プレイヤー名を入力</h2>
+            <div id="playerInputs"></div>
+            <button id="startGame" class="btn btn-success">ゲーム開始！</button>
+        </div>
+
+        <div id="game" class="game-section hidden">
+            <div id="currentPlayer" class="player-turn"></div>
+            <div class="number-display">
+                <div id="numberDisplay" class="number">-</div>
+            </div>
+            <div class="game-controls">
+                <button id="startRoll" class="btn btn-primary">スタート</button>
+                <button id="stopRoll" class="btn btn-danger hidden">ストップ</button>
+                <button id="nextPlayer" class="btn btn-warning hidden">次のプレイヤー</button>
+            </div>
+        </div>
+
+        <button id="showResults" class="btn btn-info hidden">結果を見る</button>
+
+        <div id="results" class="game-section hidden">
+            <h2>結果発表！</h2>
+            <ul id="resultsList" class="results-list"></ul>
+            <button id="playAgain" class="btn btn-success">もう一度プレイ</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
