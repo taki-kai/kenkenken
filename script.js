@@ -4,6 +4,7 @@ let playerResults = [];
 let players = [];
 let rolling = false;
 let rollInterval;
+let usedNumbers = new Set();
 
 document.getElementById('setPlayers').addEventListener('click', setPlayers);
 document.getElementById('startGame').addEventListener('click', startGame);
@@ -44,13 +45,21 @@ function startGame() {
     updatePlayerDisplay();
 }
 
+function generateUniqueNumber() {
+    let number;
+    do {
+        number = Math.floor(Math.random() * 100) + 1;
+    } while (usedNumbers.has(number));
+    return number;
+}
+
 function startRoll() {
     rolling = true;
     document.getElementById('startRoll').classList.add('hidden');
     document.getElementById('stopRoll').classList.remove('hidden');
     rollInterval = setInterval(() => {
         const numberDisplay = document.getElementById('numberDisplay');
-        numberDisplay.textContent = Math.floor(Math.random() * 100) + 1;
+        numberDisplay.textContent = generateUniqueNumber();
         numberDisplay.classList.remove('number-animation');
         void numberDisplay.offsetWidth; // トリガーリフロー
         numberDisplay.classList.add('number-animation');
@@ -62,7 +71,9 @@ function stopRoll() {
     clearInterval(rollInterval);
     document.getElementById('stopRoll').classList.add('hidden');
     document.getElementById('nextPlayer').classList.remove('hidden');
-    playerResults.push(parseInt(document.getElementById('numberDisplay').textContent));
+    const finalNumber = parseInt(document.getElementById('numberDisplay').textContent);
+    usedNumbers.add(finalNumber);
+    playerResults.push(finalNumber);
 }
 
 function nextPlayer() {
@@ -99,6 +110,7 @@ function resetGame() {
     currentPlayer = 1;
     playerResults = [];
     players = [];
+    usedNumbers.clear();
     document.getElementById('results').classList.add('hidden');
     document.getElementById('setup').classList.remove('hidden');
     document.getElementById('playerCount').value = '2';
